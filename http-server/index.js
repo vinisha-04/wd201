@@ -5,8 +5,11 @@ let homeContent = "";
 let projectContent = "";
 let registrationContent = "";
 
+const args = require("minimist")(process.argv.slice(2));
+console.log(args);
+
 fs.readFile("home.html", (err, home) => {
-  if (err) {
+  if (err) { 
     throw err;
   }
   homeContent = home;
@@ -49,4 +52,10 @@ http
         break;
     }
   })
-  .listen(3000);
+  .listen(args["port"], (err)=>{
+    if(err){
+      throw err;
+    };
+    console.log(`server is at ${args["ports"]}`);
+  });
+  
